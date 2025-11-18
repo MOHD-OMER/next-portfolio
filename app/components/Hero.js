@@ -130,17 +130,17 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen pt-20 md:pt-32 flex flex-col items-center justify-center text-center overflow-hidden"
     >
-      {/* Layered Animated Background with Multiple Gradients */}
-      <div className="absolute inset-0 opacity-60">
+      {/* Layered Animated Background - FIXED for Mobile */}
+      <div className="absolute inset-0 opacity-60 overflow-hidden">
         <motion.div
-          className="absolute top-0 left-1/4 w-[800px] h-[800px] rounded-full blur-[140px]"
+          className="absolute top-0 left-1/4 w-[400px] h-[400px] md:w-[800px] md:h-[800px] rounded-full blur-[80px] md:blur-[140px]"
           style={{
             background: "radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(147, 51, 234, 0.15) 50%, transparent 70%)",
           }}
           animate={{
-            x: [0, 150, -100, 0],
-            y: [0, -80, 60, 0],
-            scale: [1, 1.4, 1.2, 1],
+            x: [0, 75, -50, 0],
+            y: [0, -40, 30, 0],
+            scale: [1, 1.2, 1.1, 1],
           }}
           transition={{
             duration: 25,
@@ -149,14 +149,14 @@ export default function Hero() {
           }}
         />
         <motion.div
-          className="absolute bottom-0 right-1/4 w-[700px] h-[700px] rounded-full blur-[120px]"
+          className="absolute bottom-0 right-1/4 w-[350px] h-[350px] md:w-[700px] md:h-[700px] rounded-full blur-[70px] md:blur-[120px]"
           style={{
             background: "radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(236, 72, 153, 0.15) 50%, transparent 70%)",
           }}
           animate={{
-            x: [0, -120, 80, 0],
-            y: [0, 100, -60, 0],
-            scale: [1, 1.3, 1.25, 1],
+            x: [0, -60, 40, 0],
+            y: [0, 50, -30, 0],
+            scale: [1, 1.15, 1.1, 1],
           }}
           transition={{
             duration: 28,
@@ -166,14 +166,14 @@ export default function Hero() {
           }}
         />
         <motion.div
-          className="absolute top-1/2 left-1/2 w-[600px] h-[600px] rounded-full blur-[110px]"
+          className="absolute top-1/2 left-1/2 w-[300px] h-[300px] md:w-[600px] md:h-[600px] rounded-full blur-[60px] md:blur-[110px]"
           style={{
             background: "radial-gradient(circle, rgba(34, 211, 238, 0.18) 0%, rgba(59, 130, 246, 0.12) 50%, transparent 70%)",
           }}
           animate={{
-            x: [0, 100, -80, 0],
-            y: [0, -100, 80, 0],
-            scale: [1, 1.35, 1.15, 1],
+            x: [0, 50, -40, 0],
+            y: [0, -50, 40, 0],
+            scale: [1, 1.2, 1.1, 1],
           }}
           transition={{
             duration: 22,
@@ -183,14 +183,14 @@ export default function Hero() {
           }}
         />
         <motion.div
-          className="absolute top-1/4 right-1/3 w-[550px] h-[550px] rounded-full blur-[100px]"
+          className="absolute top-1/4 right-1/3 w-[280px] h-[280px] md:w-[550px] md:h-[550px] rounded-full blur-[50px] md:blur-[100px]"
           style={{
             background: "radial-gradient(circle, rgba(251, 146, 60, 0.15) 0%, rgba(239, 68, 68, 0.1) 50%, transparent 70%)",
           }}
           animate={{
-            x: [0, -90, 70, 0],
-            y: [0, 70, -50, 0],
-            scale: [1, 1.25, 1.1, 1],
+            x: [0, -45, 35, 0],
+            y: [0, 35, -25, 0],
+            scale: [1, 1.15, 1.05, 1],
           }}
           transition={{
             duration: 20,
@@ -201,15 +201,15 @@ export default function Hero() {
         />
       </div>
 
-      {/* Dynamic Grid Pattern with Enhanced Mouse Interaction */}
+      {/* Dynamic Grid Pattern - Reduced movement on mobile */}
       <motion.div 
         className="absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage: `linear-gradient(rgba(100,200,255,0.2) 1px, transparent 1px),
                            linear-gradient(90deg, rgba(100,200,255,0.2) 1px, transparent 1px)`,
           backgroundSize: '50px 50px',
-          x: smoothMouseX,
-          y: smoothMouseY,
+          x: useTransform(smoothMouseX, (val) => val * 0.5),
+          y: useTransform(smoothMouseY, (val) => val * 0.5),
         }}
       />
 
@@ -217,7 +217,7 @@ export default function Hero() {
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(circle 800px at 50% 40%, rgba(100, 200, 255, 0.08), transparent 70%)",
+          background: "radial-gradient(circle 600px at 50% 40%, rgba(100, 200, 255, 0.08), transparent 70%)",
         }}
         animate={{
           opacity: [0.3, 0.6, 0.3],
@@ -240,13 +240,12 @@ export default function Hero() {
           viewport={{ once: true }}
           className="w-full flex flex-col items-center"
         >
-          {/* Enhanced Profile Image with Holographic Effect */}
-          <div className="w-full flex justify-center items-center mb-10 mt-10 md:mt-20">
+          {/* Enhanced Profile Image */}
+          <div className="w-full flex justify-center items-center mb-8 md:mb-10 mt-6 md:mt-20">
             <motion.div className="relative">
-              {/* Profile Image Container */}
               <motion.div
-                className="relative w-[200px] h-[200px] rounded-full p-[4px]
-                bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 shadow-[0_0_80px_rgba(100,150,255,0.5)]"
+                className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px] rounded-full p-[4px]
+                bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 shadow-[0_0_60px_rgba(100,150,255,0.4)] md:shadow-[0_0_80px_rgba(100,150,255,0.5)]"
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               >
@@ -258,10 +257,9 @@ export default function Hero() {
                     className="object-cover"
                     style={{ objectPosition: 'center' }}
                     priority
-                    sizes="200px"
+                    sizes="(max-width: 768px) 160px, 200px"
                   />
                   
-                  {/* Holographic Overlay */}
                   <motion.div
                     className="absolute inset-0"
                     style={{
@@ -278,19 +276,15 @@ export default function Hero() {
                   />
                 </div>
               </motion.div>
-
-
-
-
             </motion.div>
           </div>
 
-          {/* Name with Enhanced Typing + Multi-layered Glow */}
+          {/* Name with Enhanced Typing - Responsive text size */}
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-3 relative text-center tracking-tight"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold mb-3 relative text-center tracking-tight px-4"
             style={{
-              transform: `translate(${mousePosition.x * 0.015}px, ${mousePosition.y * 0.015}px)`
+              transform: `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px)`
             }}
           >
             <motion.span
@@ -303,29 +297,28 @@ export default function Hero() {
                 {scrambledName}
               </span>
 
-              {/* Animated Cursor */}
               <motion.span
                 animate={{ opacity: typingComplete ? [1, 0, 1] : 1 }}
                 transition={{ 
                   duration: 0.6, 
                   repeat: typingComplete ? Infinity : 0 
                 }}
-                className="inline-block ml-1.5 text-blue-400 font-normal text-5xl md:text-7xl"
+                className="inline-block ml-1 md:ml-1.5 text-blue-400 font-normal text-4xl sm:text-5xl md:text-7xl"
               >
                 |
               </motion.span>
             </motion.span>
             
-            {/* Multi-layer Neon Glow */}
+            {/* Multi-layer Neon Glow - Hidden on very small screens */}
             <motion.span
-              className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent blur-xl pointer-events-none opacity-60"
+              className="hidden sm:block absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent blur-xl pointer-events-none opacity-60"
               animate={{ opacity: [0.4, 0.8, 0.4] }}
               transition={{ duration: 2.5, repeat: Infinity }}
             >
               Mohammed Abdul Omer
             </motion.span>
             <motion.span
-              className="absolute inset-0 bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent blur-2xl pointer-events-none opacity-40"
+              className="hidden md:block absolute inset-0 bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent blur-2xl pointer-events-none opacity-40"
               animate={{ opacity: [0.2, 0.6, 0.2] }}
               transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }}
             >
@@ -333,10 +326,10 @@ export default function Hero() {
             </motion.span>
           </motion.h1>
 
-          {/* Enhanced Title Transition with Gradient Animation */}
+          {/* Enhanced Title Transition - Responsive */}
           <motion.div
             variants={itemVariants}
-            className="mt-6 relative h-14 flex items-center justify-center"
+            className="mt-4 md:mt-6 relative h-12 md:h-14 flex items-center justify-center px-4"
           >
             <motion.div
               key={currentTitleIndex}
@@ -344,7 +337,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
               exit={{ opacity: 0, y: -25, filter: "blur(12px)", scale: 0.95 }}
               transition={{ duration: 0.7, ease: [0.19, 1, 0.22, 1] }}
-              className="absolute text-xl md:text-2xl lg:text-4xl font-extrabold whitespace-nowrap"
+              className="absolute text-lg sm:text-xl md:text-2xl lg:text-4xl font-extrabold whitespace-nowrap"
             >
               <motion.span
                 className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
@@ -365,10 +358,10 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Enhanced Description with Interactive Highlights */}
+          {/* Enhanced Description - Responsive */}
           <motion.p
             variants={itemVariants}
-            className="text-gray-300 mt-16 max-w-4xl px-6 text-lg md:text-xl lg:text-2xl leading-relaxed font-light"
+            className="text-gray-300 mt-10 md:mt-16 max-w-4xl px-6 text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed font-light"
           >
             Architecting intelligent systems at the intersection of{" "}
             <motion.span 
@@ -381,7 +374,7 @@ export default function Hero() {
             >
               deep learning
               <motion.span
-                className="absolute -bottom-1 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
+                className="absolute -bottom-1 left-0 right-0 h-[2px] md:h-[3px] bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
                 initial={{ scaleX: 0 }}
                 whileHover={{ scaleX: 1 }}
                 transition={{ duration: 0.3 }}
@@ -397,7 +390,7 @@ export default function Hero() {
             >
               automation
               <motion.span
-                className="absolute -bottom-1 left-0 right-0 h-[3px] bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
+                className="absolute -bottom-1 left-0 right-0 h-[2px] md:h-[3px] bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
                 initial={{ scaleX: 0 }}
                 whileHover={{ scaleX: 1 }}
                 transition={{ duration: 0.3 }}
@@ -413,7 +406,7 @@ export default function Hero() {
             >
               innovation
               <motion.span
-                className="absolute -bottom-1 left-0 right-0 h-[3px] bg-gradient-to-r from-pink-400 to-cyan-400 rounded-full"
+                className="absolute -bottom-1 left-0 right-0 h-[2px] md:h-[3px] bg-gradient-to-r from-pink-400 to-cyan-400 rounded-full"
                 initial={{ scaleX: 0 }}
                 whileHover={{ scaleX: 1 }}
                 transition={{ duration: 0.3 }}
@@ -422,19 +415,19 @@ export default function Hero() {
             {" "}to transform complex challenges into elegant solutions.
           </motion.p>
 
-          {/* Premium CTA Buttons with Advanced Effects */}
+          {/* Premium CTA Buttons - Responsive */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap gap-6 mt-16 justify-center"
+            className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6 mt-10 md:mt-16 justify-center w-full px-4"
           >
             <motion.a
               ref={buttonRef}
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative px-12 py-6 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 text-white rounded-2xl font-bold overflow-hidden shadow-[0_10px_40px_rgba(100,150,255,0.4)] transition-all duration-300"
+              className="group relative px-8 md:px-12 py-4 md:py-6 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 text-white rounded-2xl font-bold overflow-hidden shadow-[0_10px_30px_rgba(100,150,255,0.3)] md:shadow-[0_10px_40px_rgba(100,150,255,0.4)] transition-all duration-300"
               whileHover={{ 
-                scale: 1.08,
+                scale: 1.05,
                 boxShadow: "0 20px 60px rgba(100, 150, 255, 0.6)",
               }}
               whileTap={{ scale: 0.95 }}
@@ -442,13 +435,11 @@ export default function Hero() {
               onMouseLeave={() => handleButtonLeave(buttonRef)}
               style={{ transition: "transform 0.2s ease-out" }}
             >
-              {/* Animated Gradient Overlay */}
               <motion.div
                 className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100"
                 transition={{ duration: 0.4 }}
               />
               
-              {/* Shimmer Effect */}
               <motion.div
                 className="absolute inset-0"
                 animate={{
@@ -465,8 +456,8 @@ export default function Hero() {
                 }}
               />
               
-              <span className="relative z-10 flex items-center gap-3 text-lg">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span className="relative z-10 flex items-center justify-center gap-2 md:gap-3 text-base md:text-lg">
+                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
                 Download Resume
@@ -476,9 +467,9 @@ export default function Hero() {
             <motion.a
               ref={exploreButtonRef}
               href="#projects"
-              className="group relative px-12 py-6 border-2 border-blue-400/70 text-blue-400 rounded-2xl font-bold overflow-hidden backdrop-blur-xl bg-blue-500/10 shadow-[0_10px_40px_rgba(100,150,255,0.2)] transition-all duration-300"
+              className="group relative px-8 md:px-12 py-4 md:py-6 border-2 border-blue-400/70 text-blue-400 rounded-2xl font-bold overflow-hidden backdrop-blur-xl bg-blue-500/10 shadow-[0_10px_30px_rgba(100,150,255,0.15)] md:shadow-[0_10px_40px_rgba(100,150,255,0.2)] transition-all duration-300"
               whileHover={{ 
-                scale: 1.08,
+                scale: 1.05,
                 borderColor: "#60a5fa",
                 backgroundColor: "rgba(59, 130, 246, 0.2)",
                 boxShadow: "0 20px 60px rgba(100, 150, 255, 0.4)"
@@ -488,14 +479,13 @@ export default function Hero() {
               onMouseLeave={() => handleButtonLeave(exploreButtonRef)}
               style={{ transition: "transform 0.2s ease-out" }}
             >
-              {/* Gradient Sweep on Hover */}
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-pink-400/20 opacity-0 group-hover:opacity-100"
                 transition={{ duration: 0.5 }}
               />
               
-              <span className="relative z-10 flex items-center gap-3 text-lg">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span className="relative z-10 flex items-center justify-center gap-2 md:gap-3 text-base md:text-lg">
+                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
                 Explore Projects
@@ -503,20 +493,20 @@ export default function Hero() {
             </motion.a>
           </motion.div>
 
-          {/* Modern Scroll Indicator */}
+          {/* Modern Scroll Indicator - Responsive */}
           <motion.div
             variants={itemVariants}
-            className="mt-28 flex flex-col items-center gap-5"
+            className="mt-16 md:mt-28 flex flex-col items-center gap-3 md:gap-5"
           >
             <motion.span 
-              className="text-gray-400 text-sm font-semibold tracking-[0.25em] uppercase"
+              className="text-gray-400 text-xs md:text-sm font-semibold tracking-[0.2em] md:tracking-[0.25em] uppercase"
               animate={{ opacity: [0.3, 1, 0.3] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
               Scroll to explore
             </motion.span>
             <motion.div
-              className="relative w-8 h-14 border-2 border-blue-400/50 rounded-full flex items-start justify-center p-3 backdrop-blur-md bg-blue-500/10 shadow-[0_0_30px_rgba(100,150,255,0.2)]"
+              className="relative w-7 h-12 md:w-8 md:h-14 border-2 border-blue-400/50 rounded-full flex items-start justify-center p-2 md:p-3 backdrop-blur-md bg-blue-500/10 shadow-[0_0_20px_rgba(100,150,255,0.15)] md:shadow-[0_0_30px_rgba(100,150,255,0.2)]"
               whileHover={{ 
                 borderColor: "#60a5fa",
                 scale: 1.15,
@@ -524,15 +514,15 @@ export default function Hero() {
               }}
             >
               <motion.div
-                className="w-2.5 h-2.5 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full shadow-lg shadow-blue-400/60"
-                animate={{ y: [0, 24, 0] }}
+                className="w-2 h-2 md:w-2.5 md:h-2.5 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full shadow-lg shadow-blue-400/60"
+                animate={{ y: [0, 20, 0] }}
                 transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
               />
             </motion.div>
           </motion.div>
         </motion.div>
 
-        {/* Enhanced Floating Particles with Varied Colors */}
+        {/* Floating Particles - Reduced on mobile */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {[...Array(16)].map((_, i) => {
             const colors = [
@@ -544,7 +534,7 @@ export default function Hero() {
             return (
               <motion.div
                 key={i}
-                className="absolute rounded-full"
+                className="absolute rounded-full hidden sm:block"
                 style={{
                   width: `${2.5 + (i % 4)}px`,
                   height: `${2.5 + (i % 4)}px`,
