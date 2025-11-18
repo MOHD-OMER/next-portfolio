@@ -1,0 +1,228 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+export default function Experience() {
+  const experiences = [
+    {
+      role: "AI Research Intern",
+      company: "Techzone Academy for Training & Research",
+      location: "Hyderabad, India",
+      period: "March 2025 - July 2025",
+      duration: "5 months",
+      type: "Internship",
+      icon: "🔬",
+      color: "from-blue-500 to-cyan-500",
+      achievements: [
+        "Conducted applied research under the mentorship of senior AI researchers, focusing on educational technology applications",
+        "Developed AI-powered educational tools including an intelligent Doubt Tutor and adaptive PTE/GRE Mock Test applications",
+        "Applied Machine Learning and Natural Language Processing techniques to enhance user engagement and create adaptive learning experiences",
+        "Collaborated on integrating AI modules into existing digital education platforms, improving accessibility for 10K+ students",
+        "Implemented RAG-based question answering systems with contextual understanding for personalized learning paths"
+      ],
+      technologies: ["Python", "NLP", "Machine Learning", "LLMs", "RAG Systems", "FastAPI", "TensorFlow"],
+      highlights: [
+        { metric: "10K+", label: "Students Impacted" },
+        { metric: "3", label: "AI Tools Deployed" },
+        { metric: "40%", label: "Engagement Increase" }
+      ]
+    }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
+  return (
+    <div className="relative">
+      {/* Background decorative elements */}
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl" />
+      <div className="absolute -bottom-20 right-0 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl" />
+
+      {/* Section Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="mb-12 text-center"
+      >
+        <h2 className="text-5xl md:text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 inline-block">
+          Experience
+        </h2>
+        <motion.div 
+          className="h-1.5 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mx-auto"
+          initial={{ width: 0 }}
+          whileInView={{ width: "120px" }}
+          transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+        />
+        <p className="mt-4 text-gray-400 text-lg max-w-2xl mx-auto">
+          Building impactful AI solutions in educational technology
+        </p>
+      </motion.div>
+
+      {/* Timeline */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="relative max-w-4xl mx-auto"
+      >
+        {/* Timeline line */}
+        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 opacity-20 hidden md:block" />
+
+        {experiences.map((exp, idx) => (
+          <motion.div
+            key={idx}
+            variants={itemVariants}
+            className="relative mb-12 last:mb-0"
+          >
+            {/* Timeline dot */}
+            <div className="absolute left-8 w-4 h-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full border-4 border-gray-900 hidden md:block transform -translate-x-[7px] mt-8" />
+
+            {/* Experience Card */}
+            <div className="md:ml-20 relative group">
+              <motion.div
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                className="relative rounded-2xl p-8 bg-gradient-to-br from-white/[0.07] to-white/[0.03] backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-2xl hover:border-white/20 transition-all duration-300 overflow-hidden"
+              >
+                {/* Animated background gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${exp.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+
+                {/* Header Section */}
+                <div className="relative flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+                  <div className="flex items-start gap-4">
+                    {/* Icon */}
+                    <div className={`text-4xl p-3 rounded-xl bg-gradient-to-br ${exp.color} bg-opacity-10 flex-shrink-0`}>
+                      {exp.icon}
+                    </div>
+                    
+                    {/* Title and Company */}
+                    <div>
+                      <h3 className={`text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${exp.color} mb-1`}>
+                        {exp.role}
+                      </h3>
+                      <p className="text-lg text-gray-300 font-semibold mb-1">
+                        {exp.company}
+                      </p>
+                      <p className="text-sm text-gray-400 flex items-center gap-2">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {exp.location}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Period and Type */}
+                  <div className="flex flex-col items-end gap-2">
+                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      {exp.period}
+                    </div>
+                    <span className="text-xs px-3 py-1 rounded-full bg-white/5 text-gray-400 border border-white/10">
+                      {exp.duration}
+                    </span>
+                    <span className={`text-xs px-3 py-1 rounded-full bg-gradient-to-r ${exp.color} bg-opacity-10 text-transparent bg-clip-text font-semibold border border-white/10`}>
+                      {exp.type}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Achievements */}
+                <div className="relative mb-6">
+                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
+                    Key Achievements
+                  </h4>
+                  <ul className="space-y-3">
+                    {exp.achievements.map((achievement, achIdx) => (
+                      <motion.li
+                        key={achIdx}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 * achIdx, duration: 0.4 }}
+                        viewport={{ once: true }}
+                        className="flex items-start gap-3 group/item"
+                      >
+                        <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${exp.color} mt-2 flex-shrink-0 group-hover/item:scale-150 transition-transform`} />
+                        <span className="text-gray-300 text-sm leading-relaxed group-hover/item:text-white transition-colors">
+                          {achievement}
+                        </span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Technologies */}
+                <div className="relative mb-6">
+                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
+                    Technologies Used
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {exp.technologies.map((tech, techIdx) => (
+                      <span
+                        key={techIdx}
+                        className={`text-xs px-3 py-1.5 rounded-md bg-gradient-to-r ${exp.color} bg-opacity-5 text-gray-300 border border-white/10 hover:border-white/30 transition-colors`}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Highlights/Metrics */}
+                <div className="relative pt-6 border-t border-white/10">
+                  <div className="grid grid-cols-3 gap-4">
+                    {exp.highlights.map((highlight, hIdx) => (
+                      <div key={hIdx} className="text-center">
+                        <div className={`text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${exp.color}`}>
+                          {highlight.metric}
+                        </div>
+                        <div className="text-xs text-gray-400 mt-1">
+                          {highlight.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Decorative corner element */}
+                <div className={`absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br ${exp.color} opacity-5 rounded-full blur-2xl group-hover:opacity-10 transition-opacity`} />
+              </motion.div>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* Bottom CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+        viewport={{ once: true }}
+        className="mt-16 text-center"
+      >
+      </motion.div>
+    </div>
+  );
+}
