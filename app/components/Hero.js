@@ -129,7 +129,7 @@ export default function Hero() {
     <section
       ref={containerRef}
       id="home"
-      className="relative min-h-screen pt-32 flex flex-col items-center justify-center text-center overflow-hidden"
+      className="relative min-h-screen pt-20 md:pt-32 flex flex-col items-center justify-center text-center overflow-hidden"
     >
       {/* Layered Animated Background with Multiple Gradients */}
       <div className="absolute inset-0 opacity-60">
@@ -242,7 +242,7 @@ export default function Hero() {
           className="w-full flex flex-col items-center"
         >
           {/* Enhanced Profile Image with Holographic Effect */}
-          <div className="w-full flex justify-center items-center mb-10 mt-20">
+          <div className="w-full flex justify-center items-center mb-10 mt-10 md:mt-20">
             <motion.div className="relative">
               {/* Profile Image Container */}
               <motion.div
