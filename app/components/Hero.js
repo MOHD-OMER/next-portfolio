@@ -18,7 +18,6 @@ export default function Hero() {
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
   const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
 
   // Smooth mouse tracking with spring physics
@@ -231,7 +230,7 @@ export default function Hero() {
       />
 
       <motion.div
-        style={{ opacity, scale, y }}
+        style={{ opacity, y }}
         className="relative z-10 w-full flex flex-col items-center px-4"
       >
         <motion.div
@@ -453,10 +452,10 @@ export default function Hero() {
               <motion.div
                 className="absolute inset-0"
                 animate={{
-                  backgroundPosition: ["0% 0%", "100% 100%"],
+                  backgroundPosition: ["0%", "200%"],
                 }}
                 transition={{
-                  duration: 2,
+                  duration: 2.5,
                   repeat: Infinity,
                   ease: "linear",
                 }}
