@@ -8,6 +8,7 @@ export default function Hero() {
   const [typingComplete, setTypingComplete] = useState(false);
   const [scrambledName, setScrambledName] = useState("");
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const containerRef = useRef(null);
   const buttonRef = useRef(null);
   const exploreButtonRef = useRef(null);
@@ -28,8 +29,11 @@ export default function Hero() {
 
   // Detect mobile devices
   useEffect(() => {
+    setMounted(true);
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      if (typeof window !== 'undefined') {
+        setIsMobile(window.innerWidth < 768);
+      }
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -37,7 +41,7 @@ export default function Hero() {
   }, []);
 
   const handleMouseMove = useCallback((e) => {
-    if (isMobile) return; // Disable on mobile for performance
+    if (isMobile || typeof window === 'undefined') return; // Disable on mobile for performance
     const { clientX, clientY } = e;
     setMousePosition({
       x: (clientX / window.innerWidth - 0.5) * 20,
@@ -76,7 +80,7 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    if (!isMobile) {
+    if (!isMobile && typeof window !== 'undefined') {
       window.addEventListener("mousemove", handleMouseMove);
       return () => window.removeEventListener("mousemove", handleMouseMove);
     }
@@ -143,6 +147,16 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 flex flex-col items-center justify-center text-center overflow-hidden px-4"
     >
+      {!mounted ? (
+        <div className="relative z-10 w-full flex flex-col items-center">
+          <div className="animate-pulse flex flex-col items-center gap-6">
+            <div className="w-[180px] h-[180px] rounded-full bg-gray-800" />
+            <div className="h-12 w-96 bg-gray-800 rounded" />
+            <div className="h-8 w-64 bg-gray-800 rounded" />
+          </div>
+        </div>
+      ) : (
+        <>
       {/* Layered Animated Background - Optimized for Mobile */}
       <div className="absolute inset-0 opacity-50 md:opacity-60 overflow-hidden">
         <motion.div
@@ -546,7 +560,9 @@ export default function Hero() {
             })}
           </div>
         )}
-      </motion.div>  
+      </motion.div>
+        </>
+      )}
     </section>
   );
 }
