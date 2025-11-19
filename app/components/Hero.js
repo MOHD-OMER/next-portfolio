@@ -13,6 +13,12 @@ export default function Hero() {
   const buttonRef = useRef(null);
   const exploreButtonRef = useRef(null);
 
+  // Initialize all motion values unconditionally
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothMouseX = useSpring(mouseX, { damping: 30, stiffness: 200 });
+  const smoothMouseY = useSpring(mouseY, { damping: 30, stiffness: 200 });
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -20,12 +26,10 @@ export default function Hero() {
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
-
-  // Smooth mouse tracking with spring physics
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothMouseX = useSpring(mouseX, { damping: 30, stiffness: 200 });
-  const smoothMouseY = useSpring(mouseY, { damping: 30, stiffness: 200 });
+  
+  // Create transforms for grid that won't be used on mobile
+  const gridX = useTransform(smoothMouseX, (val) => val * 0.5);
+  const gridY = useTransform(smoothMouseY, (val) => val * 0.5);
 
   // Detect mobile devices and set mounted
   useEffect(() => {
@@ -237,8 +241,8 @@ export default function Hero() {
             backgroundImage: `linear-gradient(rgba(100,200,255,0.2) 1px, transparent 1px),
                              linear-gradient(90deg, rgba(100,200,255,0.2) 1px, transparent 1px)`,
             backgroundSize: '50px 50px',
-            x: useTransform(smoothMouseX, (val) => val * 0.5),
-            y: useTransform(smoothMouseY, (val) => val * 0.5),
+            x: gridX,
+            y: gridY,
           }}
         />
       )}
