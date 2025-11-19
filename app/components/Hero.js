@@ -27,13 +27,11 @@ export default function Hero() {
   const smoothMouseX = useSpring(mouseX, { damping: 30, stiffness: 200 });
   const smoothMouseY = useSpring(mouseY, { damping: 30, stiffness: 200 });
 
-  // Detect mobile devices
+  // Detect mobile devices and set mounted
   useEffect(() => {
     setMounted(true);
     const checkMobile = () => {
-      if (typeof window !== 'undefined') {
-        setIsMobile(window.innerWidth < 768);
-      }
+      setIsMobile(window.innerWidth < 768);
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -41,7 +39,7 @@ export default function Hero() {
   }, []);
 
   const handleMouseMove = useCallback((e) => {
-    if (isMobile || typeof window === 'undefined') return; // Disable on mobile for performance
+    if (isMobile) return;
     const { clientX, clientY } = e;
     setMousePosition({
       x: (clientX / window.innerWidth - 0.5) * 20,
@@ -80,11 +78,11 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    if (!isMobile && typeof window !== 'undefined') {
+    if (!isMobile && mounted) {
       window.addEventListener("mousemove", handleMouseMove);
       return () => window.removeEventListener("mousemove", handleMouseMove);
     }
-  }, [handleMouseMove, isMobile]);
+  }, [handleMouseMove, isMobile, mounted]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -141,22 +139,30 @@ export default function Hero() {
     ref.current.style.transform = "translate(0px, 0px)";
   };
 
+  // Show loading skeleton until mounted
+  if (!mounted) {
+    return (
+      <section
+        id="home"
+        className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 flex flex-col items-center justify-center text-center overflow-hidden px-4"
+      >
+        <div className="relative z-10 w-full flex flex-col items-center">
+          <div className="animate-pulse flex flex-col items-center gap-6">
+            <div className="w-[180px] h-[180px] rounded-full bg-gray-800" />
+            <div className="h-12 w-96 max-w-full bg-gray-800 rounded" />
+            <div className="h-8 w-64 max-w-full bg-gray-800 rounded" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       ref={containerRef}
       id="home"
       className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 flex flex-col items-center justify-center text-center overflow-hidden px-4"
     >
-      {!mounted ? (
-        <div className="relative z-10 w-full flex flex-col items-center">
-          <div className="animate-pulse flex flex-col items-center gap-6">
-            <div className="w-[180px] h-[180px] rounded-full bg-gray-800" />
-            <div className="h-12 w-96 bg-gray-800 rounded" />
-            <div className="h-8 w-64 bg-gray-800 rounded" />
-          </div>
-        </div>
-      ) : (
-        <>
       {/* Layered Animated Background - Optimized for Mobile */}
       <div className="absolute inset-0 opacity-50 md:opacity-60 overflow-hidden">
         <motion.div
@@ -223,7 +229,7 @@ export default function Hero() {
         />
       </div>
 
-      {/* Dynamic Grid Pattern - Disabled on mobile for performance */}
+      {/* Dynamic Grid Pattern - Desktop Only */}
       {!isMobile && (
         <motion.div 
           className="absolute inset-0 opacity-[0.06]"
@@ -561,8 +567,6 @@ export default function Hero() {
           </div>
         )}
       </motion.div>
-        </>
-      )}
     </section>
   );
 }
